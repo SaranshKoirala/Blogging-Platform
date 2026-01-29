@@ -12,7 +12,9 @@ const getBlog = async (req, res) => {
 };
 
 const getBlogs = async (req, res) => {
-  const blogs = await getBlogsService();
+  const page = Number(req.query.page) || 1;
+
+  const blogs = await getBlogsService(page);
 
   res.status(200).json({
     success: true,

@@ -1,4 +1,5 @@
 const generateSlug = require('../utils/slugUtils');
+const pagination = require('../utils/pagination');
 const Blog = require('../models/Blog');
 
 const createBlogService = async (data, file) => {
@@ -11,8 +12,9 @@ const createBlogService = async (data, file) => {
   return await Blog.create({ ...data, image: file.path, slug });
 };
 
-const getBlogsService = async () => {
-  const blogs = await Blog.find();
+const getBlogsService = async (page) => {
+  const blogs = await pagination(Blog, page);
+
   if (blogs.length == 0) {
     throw new Error('No Blogs found!');
   }
