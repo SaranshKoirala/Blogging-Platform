@@ -1,0 +1,32 @@
+const generateSlug = require('../utils/slugUtils');
+const Blog = require('../models/Blog');
+
+const createBlogService = async (data) => {
+  const slug = generateSlug(data.title);
+
+  const exists = await Blog.findOne({ slug });
+  if (exists) {
+    throw new Error('Blog with same title already exists!');
+  }
+  return await Blog.create({ ...data, slug });
+};
+
+const getBlogsService = async () => {
+  const blogs = await Blog.find();
+  if (blogs.length == 0) {
+    throw new Error('No Blogs found!');
+  }
+
+  return blogs;
+};
+
+const getBlogService = async (data) => {
+  const { slug } = data;
+  const blog = await Blog.findOne({ slug });
+  if (!blog) {
+    throw new Error("Blog isn't found!");
+  }
+  return blog;
+};
+
+module.exports = { createBlogService, getBlogsService, getBlogService };
