@@ -1,14 +1,14 @@
 const generateSlug = require('../utils/slugUtils');
 const Blog = require('../models/Blog');
 
-const createBlogService = async (data) => {
+const createBlogService = async (data, file) => {
   const slug = generateSlug(data.title);
 
   const exists = await Blog.findOne({ slug });
   if (exists) {
     throw new Error('Blog with same title already exists!');
   }
-  return await Blog.create({ ...data, slug });
+  return await Blog.create({ ...data, image: file.path, slug });
 };
 
 const getBlogsService = async () => {

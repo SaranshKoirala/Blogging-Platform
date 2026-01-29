@@ -6,9 +6,10 @@ const {
 } = require('../controller/blogController');
 const asyncHandler = require('../middleware/asyncMiddleware');
 const router = express.Router();
+const upload = require('../middleware/uploadMiddleware');
 
 router.get('/:slug', asyncHandler(getBlog));
 router.get('/', asyncHandler(getBlogs));
-router.post('/', asyncHandler(createBlog));
+router.post('/', upload.single('image'), asyncHandler(createBlog));
 
 module.exports = router;
