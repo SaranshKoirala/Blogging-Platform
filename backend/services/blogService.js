@@ -12,8 +12,8 @@ const createBlogService = async (data, file) => {
   return await Blog.create({ ...data, image: file.path, slug });
 };
 
-const getBlogsService = async (page, category) => {
-  const blogs = await pagination(Blog, page, category);
+const getBlogsService = async (req) => {
+  const blogs = await pagination(Blog, req);
 
   if (blogs.length == 0) {
     throw new Error('No Blogs found!');
