@@ -4,17 +4,20 @@ import Blog from './Blog';
 
 function Blogs() {
   const [blogs, setBlogs] = useState([]);
+  const [page, setPage] = useState(1);
+  const [category, setCategory] = useState(null);
 
   useEffect(() => {
     async function loadBlogs() {
-      const res = await fetchBlogs(1);
+      const res = await fetchBlogs({ page, category });
       setBlogs(res.data.data.data);
     }
 
     loadBlogs();
-  }, []);
+  }, [page, category]);
 
   const categories = [
+    'All',
     'Technology',
     'Lifestyle',
     'Fashion',
@@ -23,10 +26,19 @@ function Blogs() {
     'Programming',
   ];
 
+  async function handleCategoryBtn(category) {
+    if (category === 'All') {
+      setCategory(null);
+    } else {
+      setCategory(category);
+    }
+    setPage(1);
+  }
+
   console.log(blogs);
   return (
     <div className='flex gap-8'>
-      <div className='w-[70%]'>
+      <div className='w-[70%] overflow-y-auto'>
         <div className='mb-5 px-3 pb-1 border-b w-fit text-sm py'>Home</div>
         {blogs.length < 1 ? (
           <div className='w-[60%]'>
@@ -44,13 +56,18 @@ function Blogs() {
         <div className='mb-4 font-serif font-semibold font-stretch-50%'>
           Stories from all interest
         </div>
-        <div className='gap-3 grid grid-cols-3'>
+        <div className='gap-2 grid grid-cols-3'>
           {categories.map((item, index) => (
-            <div
+            <button
               key={index}
-              className='flex justify-center items-center bg-gray-200 p-2 rounded-2xl text-xs cursor-pointer'>
+              className={`flex justify-center items-center p-2 rounded-2xl text-xs cursor-pointer ${
+                (item === 'All' && category === null) || item === category
+                  ? 'bg-black text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              } `}
+              onClick={() => handleCategoryBtn(item)}>
               <p>{item}</p>
-            </div>
+            </button>
           ))}
         </div>
       </div>
