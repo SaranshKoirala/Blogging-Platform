@@ -25,7 +25,7 @@ const getBlogs = async (req, res) => {
 const createBlog = async (req, res) => {
   createBlogValidator(req);
 
-  const blog = await createBlogService(req.body, req.file);
+  const blog = await createBlogService(req);
   res
     .status(201)
     .json({ success: true, data: blog, message: 'Blog created sucessfully' });
