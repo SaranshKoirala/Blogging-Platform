@@ -1,11 +1,16 @@
-const pagination = async (model, page) => {
+const pagination = async (model, page, category) => {
+  const filter = {};
   const LIMIT = 10;
   const skip = (page - 1) * 10;
 
-  const total = await model.countDocuments();
+  if (category) {
+    filter.category = category;
+  }
+
+  const total = await model.countDocuments(filter);
 
   const data = await model
-    .find()
+    .find(filter)
     .skip(skip)
     .limit(LIMIT)
     .sort({ createdAt: -1 });
