@@ -1,8 +1,12 @@
 import api from './api';
 
-export const fetchBlogs = ({ page = 1, category } = {}) => {
+export const fetchBlogs = ({ page = 1, category, search } = {}) => {
   const params = new URLSearchParams();
   params.append('page', page);
+
+  if (search) {
+    params.append('search', search);
+  }
 
   if (category) {
     params.append('category', category);

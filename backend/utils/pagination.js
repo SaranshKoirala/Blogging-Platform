@@ -10,7 +10,7 @@ const pagination = async (model, req) => {
     filter.category = category;
   }
 
-  if (filter) {
+  if (search) {
     filter.title = { $regex: search, $options: 'i' };
   }
 

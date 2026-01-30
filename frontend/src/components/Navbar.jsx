@@ -1,7 +1,9 @@
 import { TfiWrite } from 'react-icons/tfi';
 import { IoIosSearch } from 'react-icons/io';
+import { useBlogs } from '../contexts/BlogContext';
 
 function Navbar() {
+  const { search, setSearch } = useBlogs();
   return (
     <nav className='flex justify-between items-center px-8 py-4 border-b border-b-gray-500/20'>
       <div className='flex justify-center items-center gap-4'>
@@ -13,6 +15,8 @@ function Navbar() {
           <input
             type='search'
             placeholder='Search'
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className='bg-gray-200 px-8 py-1 border border-none rounded-2xl placeholder:text-sm'
           />
         </form>

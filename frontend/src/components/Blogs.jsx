@@ -1,20 +1,8 @@
-import { useEffect, useState } from 'react';
-import { fetchBlogs } from '../services/blogService';
 import Blog from './Blog';
+import { useBlogs } from '../contexts/BlogContext';
 
 function Blogs() {
-  const [blogs, setBlogs] = useState([]);
-  const [page, setPage] = useState(1);
-  const [category, setCategory] = useState(null);
-
-  useEffect(() => {
-    async function loadBlogs() {
-      const res = await fetchBlogs({ page, category });
-      setBlogs(res.data.data.data);
-    }
-
-    loadBlogs();
-  }, [page, category]);
+  const { blogs, category, setCategory, setPage } = useBlogs();
 
   const categories = [
     'All',
