@@ -5,7 +5,9 @@ function Navbar() {
   return (
     <nav className='flex justify-between items-center px-8 py-4 border-b border-b-gray-500/20'>
       <div className='flex justify-center items-center gap-4'>
-        <div className='font-serif text-xl'>Blogging Platform</div>
+        <div className='font-serif font-stretch-50% text-xl'>
+          Blogging Platform
+        </div>
         <form className='relative'>
           <IoIosSearch className='top-2 left-2 absolute' />
           <input
