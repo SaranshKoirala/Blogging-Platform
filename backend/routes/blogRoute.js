@@ -11,6 +11,7 @@ const upload = require('../middleware/uploadMiddleware');
 const authMiddleware = require('../middleware/authMiddleware');
 
 router.get('/my', authMiddleware, asyncHandler(getMyBlogs));
+// router.get('/:userId/blogs', authMiddleware, asyncHandler(getUserBlogs))
 router.get('/:slug', asyncHandler(getBlog));
 router.get('/', asyncHandler(getBlogs));
 router.post(

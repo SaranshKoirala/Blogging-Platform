@@ -41,6 +41,10 @@ const getMyBlogsService = async (id) => {
   return myBlogs;
 };
 
+// const getUserBlogsService = async(id)=>{
+//   const userBlogs = await Blog.find()
+// }
+
 module.exports = {
   createBlogService,
   getBlogsService,

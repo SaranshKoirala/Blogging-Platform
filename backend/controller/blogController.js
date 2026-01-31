@@ -36,9 +36,19 @@ const getMyBlogs = async (req, res) => {
   const myBlogs = await getMyBlogsService(userId);
   res.status(200).json({
     success: true,
-    message: 'User blogs fetched sucessfully.',
+    message: 'My blogs fetched sucessfully.',
     data: myBlogs,
   });
 };
+
+// const getUserBlogs = async (req, res) => {
+//   const userId = req.user.id || req.user._id;
+//   const userBlogs = await getUserBlogsService(userId);
+//   res.status(200).json({
+//     success: true,
+//     message: 'User blogs fetched sucessfully.',
+//     data: userBlogs,
+//   });
+// };
 
 module.exports = { getBlogs, createBlog, getBlog, getMyBlogs };
