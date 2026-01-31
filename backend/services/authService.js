@@ -36,6 +36,6 @@ const loginService = async (data) => {
     { expiresIn: '10m' },
   );
 
-  return token;
+  return { token, user };
 };
 module.exports = { registerService, loginService };

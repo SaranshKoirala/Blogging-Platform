@@ -15,7 +15,7 @@ const createBlogService = async (req) => {
 };
 
 const getBlogsService = async (req) => {
-  const blogs = await pagination(Blog, req);
+  const blogs = await pagination(Blog, req, { path: 'author', select: 'name' });
 
   if (blogs.length == 0) {
     throw new Error('No Blogs found!');
@@ -33,4 +33,17 @@ const getBlogService = async (data) => {
   return blog;
 };
 
-module.exports = { createBlogService, getBlogsService, getBlogService };
+const getMyBlogsService = async (id) => {
+  const myBlogs = await Blog.find({ author: id }).sort({ createdAt: -1 });
+  if (myBlogs.length == 0) {
+    throw new Error('No blogs found of the user!');
+  }
+  return myBlogs;
+};
+
+module.exports = {
+  createBlogService,
+  getBlogsService,
+  getBlogService,
+  getMyBlogsService,
+};

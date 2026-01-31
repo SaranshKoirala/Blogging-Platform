@@ -1,8 +1,8 @@
-const Blog = require('../models/Blog');
 const {
   createBlogService,
   getBlogsService,
   getBlogService,
+  getMyBlogsService,
 } = require('../services/blogService');
 const createBlogValidator = require('../validators/blogValidators');
 
@@ -31,4 +31,14 @@ const createBlog = async (req, res) => {
     .json({ success: true, data: blog, message: 'Blog created sucessfully' });
 };
 
-module.exports = { getBlogs, createBlog, getBlog };
+const getMyBlogs = async (req, res) => {
+  const userId = req.user.id || req.user._id;
+  const myBlogs = await getMyBlogsService(userId);
+  res.status(200).json({
+    success: true,
+    message: 'User blogs fetched sucessfully.',
+    data: myBlogs,
+  });
+};
+
+module.exports = { getBlogs, createBlog, getBlog, getMyBlogs };
