@@ -9,6 +9,7 @@ export const BlogProvider = ({ children }) => {
   const [category, setCategory] = useState(null);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(false);
 
   useEffect(() => {
     async function loadBlogs() {
@@ -16,6 +17,7 @@ export const BlogProvider = ({ children }) => {
       try {
         const res = await fetchBlogs({ page, category, search });
         setBlogs(res.data.data.data);
+        setHasMore(res.data.data.hasMore);
       } catch (err) {
         console.error(err);
       } finally {
@@ -37,6 +39,7 @@ export const BlogProvider = ({ children }) => {
         setCategory,
         search,
         setSearch,
+        hasMore,
       }}>
       {children}
     </BlogContext.Provider>

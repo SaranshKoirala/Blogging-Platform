@@ -1,33 +1,25 @@
 import Navbar from '../components/Navbar';
 import { HiOutlineMail } from 'react-icons/hi';
 import { IoKey } from 'react-icons/io5';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { loginUser } from '../services/authService';
 import { useState } from 'react';
+import { useUser } from '../contexts/UserContext';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState();
-  const navigate = useNavigate();
+  const { login } = useUser();
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       const res = await loginUser(email, password);
-
       const { token, user } = res.data.data;
-      localStorage.setItem('token', token);
-      localStorage.setItem('role', user.role);
-
+      console.log('login', res.data.data);
+      login(user, token);
       setEmail('');
       setPassword('');
-
-      if (user.role == 'admin') {
-        navigate('/admin/dashboard');
-      } else {
-        navigate('/');
-      }
     } catch (err) {
       alert(err.message);
     }
