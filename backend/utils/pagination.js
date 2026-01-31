@@ -26,10 +26,7 @@ const pagination = async (model, req, populateOptions = null) => {
 
   return {
     data,
-    pagination: {
-      currentPage: page,
-      totalPages: Math.ceil(total / LIMIT),
-    },
+    hasMore: skip + data.length < total,
   };
 };
 
