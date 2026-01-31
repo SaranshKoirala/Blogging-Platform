@@ -18,3 +18,11 @@ export const fetchBlogs = ({ page = 1, category, search } = {}) => {
 export const fetchBlogBySlug = (slug) => {
   return api.get(`/blogs/${slug}`);
 };
+
+export const fetchMyBlogs = (token) => {
+  return api.get('/blogs/my', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

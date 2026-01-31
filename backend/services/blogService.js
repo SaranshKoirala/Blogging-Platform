@@ -35,9 +35,9 @@ const getBlogService = async (data) => {
 
 const getMyBlogsService = async (id) => {
   const myBlogs = await Blog.find({ author: id }).sort({ createdAt: -1 });
-  if (myBlogs.length == 0) {
-    throw new Error('No blogs found of the user!');
-  }
+  // if (myBlogs.length == 0) {
+  //   throw new Error('No blogs found of the user!');
+  // }
   return myBlogs;
 };
 
