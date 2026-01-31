@@ -19,7 +19,7 @@ function App() {
       </Route>
 
       <Route element={<PrivateRoute />}>
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile/:user' element={<Profile />} />
       </Route>
 
       <Route element={<AdminRoute />}>

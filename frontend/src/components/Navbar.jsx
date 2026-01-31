@@ -44,7 +44,7 @@ function Navbar() {
                   {user.name}
                 </div>
                 <Link
-                  to={'/profile'}
+                  to={`/profile/${user.name.split(' ')[0].toLowerCase()}`}
                   className='hover:bg-gray-200 mb-2 px-2 py-1'>
                   Profile
                 </Link>

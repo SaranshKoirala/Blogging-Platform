@@ -1,5 +1,11 @@
+import Navbar from '../components/Navbar';
+
 function Profile() {
-  return <div>This is the profile page</div>;
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
 }
 
 export default Profile;
