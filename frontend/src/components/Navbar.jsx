@@ -1,15 +1,16 @@
 import { TfiWrite } from 'react-icons/tfi';
 import { IoIosSearch } from 'react-icons/io';
 import { useBlogs } from '../contexts/BlogContext';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const { search, setSearch } = useBlogs();
   return (
-    <nav className='flex justify-between items-center px-8 py-4 border-b border-b-gray-500/20'>
+    <nav className='flex justify-between items-center px-8 py-2 border-b border-b-gray-500/20'>
       <div className='flex justify-center items-center gap-4'>
-        <div className='font-serif font-stretch-50% text-xl'>
+        <Link to={'/'} className='font-serif font-stretch-50% text-lg'>
           Blogging Platform
-        </div>
+        </Link>
         <form className='relative'>
           <IoIosSearch className='top-2 left-2 absolute' />
           <input
@@ -22,16 +23,20 @@ function Navbar() {
         </form>
       </div>
       <div className='flex justify-center items-center gap-5 font-serif text-sm'>
-        <div className='flex justify-center items-center gap-2 bg-gray-200 px-3 py-1 rounded-xl cursor-pointer'>
+        <Link className='flex justify-center items-center gap-2 bg-gray-200 px-3 py-1 rounded-xl cursor-pointer'>
           <TfiWrite />
           <span>Write</span>
-        </div>
-        <div className='bg-black px-3 py-1 rounded-xl text-white cursor-pointer'>
+        </Link>
+        <Link
+          to={'/login'}
+          className='bg-black px-3 py-1 rounded-xl text-white cursor-pointer'>
           Login
-        </div>
-        <div className='bg-gray-200 px-3 py-1 rounded-xl cursor-pointer'>
+        </Link>
+        <Link
+          to={'/signup'}
+          className='bg-gray-200 px-3 py-1 rounded-xl cursor-pointer'>
           Sign Up
-        </div>
+        </Link>
       </div>
     </nav>
   );
