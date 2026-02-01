@@ -1,14 +1,17 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import AdminDashboard from './pages/AdminDashboard';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import Profile from './pages/Profile';
 import AdminRoute from './routes/AdminRoute';
 import BlogDetail from './pages/BlogDetail';
 import Write from './pages/Write';
+import Admin from './pages/Admin';
+import Dashboard from './components/admin/Dashboard';
+import Users from './components/admin/Users';
+import Blogs from './components/admin/Blogs';
 
 function App() {
   return (
@@ -27,7 +30,12 @@ function App() {
       </Route>
 
       <Route element={<AdminRoute />}>
-        <Route path='/admin/dashboard' element={<AdminDashboard />} />
+        <Route path='/admin' element={<Admin />}>
+          <Route index element={<Navigate to='dashboard' />} />
+          <Route path='dashboard' element={<Dashboard />} />
+          <Route path='users' element={<Users />} />
+          <Route path='blogs' element={<Blogs />} />
+        </Route>
       </Route>
     </Routes>
   );
