@@ -7,11 +7,14 @@ import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import Profile from './pages/Profile';
 import AdminRoute from './routes/AdminRoute';
+import BlogDetail from './pages/BlogDetail';
+import Write from './pages/Write';
 
 function App() {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
+      <Route path='/:slug' element={<BlogDetail />} />
 
       <Route element={<PublicRoute />}>
         <Route path='/login' element={<Login />} />
@@ -19,6 +22,7 @@ function App() {
       </Route>
 
       <Route element={<PrivateRoute />}>
+        <Route path='/write' element={<Write />} />
         <Route path='/profile/:user' element={<Profile />} />
       </Route>
 

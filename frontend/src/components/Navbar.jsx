@@ -29,7 +29,9 @@ function Navbar() {
         </form>
       </div>
       <div className='flex justify-center items-center gap-5 font-serif text-sm'>
-        <Link className='flex justify-center items-center gap-2 bg-gray-200 px-3 py-1 rounded-xl cursor-pointer'>
+        <Link
+          to={'/write'}
+          className='flex justify-center items-center gap-2 bg-gray-200 px-3 py-1 rounded-xl cursor-pointer'>
           <TfiWrite />
           <span>Write</span>
         </Link>

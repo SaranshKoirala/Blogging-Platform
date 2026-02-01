@@ -1,5 +1,12 @@
+import Navbar from '../components/Navbar';
+
 function AdminDashboard() {
-  return <div> This is admin dashboard!</div>;
+  return (
+    <div>
+      {' '}
+      <Navbar />
+    </div>
+  );
 }
 
 export default AdminDashboard;

@@ -26,3 +26,11 @@ export const fetchMyBlogs = (token) => {
     },
   });
 };
+
+export const createBlog = (token, formData) => {
+  return api.post(`/blogs`, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
