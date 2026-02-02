@@ -24,8 +24,6 @@ function Blogs() {
     setPage(1);
   }
 
-  console.log(blogs);
-
   return (
     <>
       <div className='flex gap-8'>
