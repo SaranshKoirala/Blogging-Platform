@@ -2,14 +2,23 @@ import { TfiWrite } from 'react-icons/tfi';
 import { IoIosSearch } from 'react-icons/io';
 import { FaUser } from 'react-icons/fa';
 import { useBlogs } from '../contexts/BlogContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../contexts/UserContext';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const { search, setSearch } = useBlogs();
+  const inputRef = useRef(null);
+  const { search, setSearch } = useBlogs('');
   const { user, logout } = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (search) {
+      navigate('/', { replace: true });
+      inputRef.current?.focus();
+    }
+  }, [search, navigate]);
 
   return (
     <nav className='flex justify-between items-center px-8 py-2 border-b border-b-gray-500/20'>
@@ -20,6 +29,7 @@ function Navbar() {
         <form className='relative'>
           <IoIosSearch className='top-2 left-2 absolute' />
           <input
+            ref={inputRef}
             type='search'
             placeholder='Search'
             value={search}

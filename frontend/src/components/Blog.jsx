@@ -26,7 +26,7 @@ function Blog({ item }) {
         </div>
         <div className='w-20 h-20'>
           <img
-            src={`http://localhost:3000/${item.image}`}
+            src={`https://api-blogging-platform-en63.onrender.com/${item.image}`}
             className='w-full h-full'
           />
         </div>

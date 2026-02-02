@@ -27,7 +27,7 @@ function BlogDetail() {
       <div className='space-y-6 mx-auto px-4 py-10 max-w-4xl'>
         <div className='rounded-lg w-full h-105 overflow-hidden'>
           <img
-            src={`http://localhost:3000/${blog.image}`}
+            src={`https://api-blogging-platform-en63.onrender.com/${blog.image}`}
             alt={blog.title}
             className='w-full h-full object-cover'
           />
