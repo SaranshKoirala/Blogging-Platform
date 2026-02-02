@@ -1,12 +1,16 @@
+import { useEffect, useState } from 'react';
 import { useBlogs } from '../../contexts/BlogContext';
 import { FaRegFileAlt } from 'react-icons/fa';
 import { HiUsers } from 'react-icons/hi';
 import { IoMdEye } from 'react-icons/io';
 import { TfiStatsUp } from 'react-icons/tfi';
+import { fetchUsers } from '../../services/authService';
 
 function Dashboard() {
   const { blogs } = useBlogs();
   const recentBlogs = blogs.slice(0, 3);
+  const token = localStorage.getItem('token');
+  const [users, setUsers] = useState([]);
   console.log(recentBlogs);
 
   const stats = [
@@ -40,26 +44,18 @@ function Dashboard() {
     },
   ];
 
-  const users = [
-    {
-      id: 1,
-      name: 'Saransh Koirala',
-      email: 'upwhats498@gmail.com',
-      date: 'Feb 1, 2026',
-    },
-    {
-      id: 2,
-      name: 'Saransh Koirala',
-      email: 'saranshkoirala77@gmail.com',
-      date: 'Feb 1, 2026',
-    },
-    {
-      id: 3,
-      name: 'John Doe',
-      email: 'john@example.com',
-      date: 'Jan 30, 2026',
-    },
-  ];
+  useEffect(() => {
+    async function fetch() {
+      try {
+        const res = await fetchUsers(token);
+        setUsers(res.data.users);
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+    fetch();
+  }, []);
+
   return (
     <div>
       <div className='mb-8'>
@@ -86,8 +82,8 @@ function Dashboard() {
           </div>
         ))}
       </div>
-      <div className='flex justify-center items-center gap-4'>
-        <div className='bg-white p-6 border border-gray-200 rounded-xl w-full'>
+      <div className='flex gap-4'>
+        <div className='bg-white p-6 border border-gray-200 rounded-xl w-full h-fit'>
           <h2 className='mb-4 font-semibold text-lg'>Recent Blogs</h2>
 
           <div className='flex flex-col divide-y divide-gray-200'>
@@ -117,7 +113,7 @@ function Dashboard() {
             ))}
           </div>
         </div>
-        <div className='bg-white p-6 border border-gray-200 rounded-xl w-full'>
+        <div className='bg-white p-6 border border-gray-200 rounded-xl w-full h-fit'>
           <h2 className='mb-4 font-semibold text-lg'>Recent Users</h2>
 
           <div className='flex flex-col divide-y divide-gray-200'>

@@ -14,11 +14,27 @@ export const signupUser = (
   confirmPassword,
   role = 'user',
 ) => {
-  return api.post('auth/register', {
+  return api.post('/auth/register', {
     name,
     email,
     password,
     confirmPassword,
     role,
+  });
+};
+
+export const fetchUsers = (token) => {
+  return api.get('/auth/users', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const deleteUser = (id, token) => {
+  return api.delete(`/auth/users/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
 };

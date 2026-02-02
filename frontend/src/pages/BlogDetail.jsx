@@ -18,14 +18,13 @@ function BlogDetail() {
   }, [slug]);
 
   if (!blog) return null;
+  console.log(blog);
 
   return (
     <>
       <Navbar />
 
-      {/* Main container */}
       <div className='space-y-6 mx-auto px-4 py-10 max-w-4xl'>
-        {/* Image */}
         <div className='rounded-lg w-full h-105 overflow-hidden'>
           <img
             src={`http://localhost:3000/${blog.image}`}
@@ -34,7 +33,6 @@ function BlogDetail() {
           />
         </div>
 
-        {/* Title */}
         <h1 className='font-serif font-bold text-gray-900 text-3xl md:text-4xl'>
           {blog.title}
         </h1>
@@ -42,7 +40,7 @@ function BlogDetail() {
         <div className='flex justify-between items-center pb-4 border-b text-gray-500 text-sm'>
           <div className='flex items-center gap-2'>
             <FaUser />
-            <span>Saransh Koirala</span>
+            <span>{blog.author?.name}</span>
           </div>
 
           <div>

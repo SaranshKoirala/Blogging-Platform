@@ -34,3 +34,11 @@ export const createBlog = (token, formData) => {
     },
   });
 };
+
+export const deleteBlog = (id, token) => {
+  return api.delete(`/blogs/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

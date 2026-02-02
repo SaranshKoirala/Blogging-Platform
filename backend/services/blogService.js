@@ -26,7 +26,7 @@ const getBlogsService = async (req) => {
 
 const getBlogService = async (data) => {
   const { slug } = data;
-  const blog = await Blog.findOne({ slug });
+  const blog = await Blog.findOne({ slug }).populate('author', 'name email');
   if (!blog) {
     throw new Error("Blog isn't found!");
   }
@@ -35,15 +35,8 @@ const getBlogService = async (data) => {
 
 const getMyBlogsService = async (id) => {
   const myBlogs = await Blog.find({ author: id }).sort({ createdAt: -1 });
-  // if (myBlogs.length == 0) {
-  //   throw new Error('No blogs found of the user!');
-  // }
   return myBlogs;
 };
-
-// const getUserBlogsService = async(id)=>{
-//   const userBlogs = await Blog.find()
-// }
 
 module.exports = {
   createBlogService,

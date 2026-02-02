@@ -32,6 +32,7 @@ export const BlogProvider = ({ children }) => {
     <BlogContext.Provider
       value={{
         blogs,
+        setBlogs,
         loading,
         page,
         setPage,

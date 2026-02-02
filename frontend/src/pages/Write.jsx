@@ -5,12 +5,15 @@ import { FiUpload } from 'react-icons/fi';
 import { useState } from 'react';
 import { createBlog } from '../services/blogService';
 import { useNavigate } from 'react-router-dom';
+import { useBlogs } from '../contexts/BlogContext';
 
 function Write() {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [image, setImage] = useState(null);
   const [content, setContent] = useState('');
+
+  const { blogs, setBlogs } = useBlogs();
 
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
@@ -19,13 +22,12 @@ function Write() {
     const file = e.target.files[0];
     if (!file) {
       alert('Please select a file!');
-      return; // Add return here
+      return;
     }
     setImage(file);
   }
 
   async function submitBlog(e) {
-    // Make it async
     e.preventDefault();
 
     if (!token) {
@@ -37,15 +39,16 @@ function Write() {
       return alert('Fill out the form!');
     }
 
-    // ✅ CORRECT - Create FormData inside submit function
     const formData = new FormData();
-    formData.append('image', image); // image has the actual file now
+    formData.append('image', image);
     formData.append('title', title);
     formData.append('category', category);
     formData.append('content', content);
 
     try {
-      await createBlog(token, formData); // Add await
+      const res = await createBlog(token, formData);
+      console.log('created blog', res);
+      setBlogs((prev) => [res.data.data, ...prev]);
       navigate('/');
     } catch (err) {
       console.error('Error creating blog:', err);
@@ -54,7 +57,7 @@ function Write() {
   }
 
   function handleCancelBtn(e) {
-    e.preventDefault(); // Prevent form submission
+    e.preventDefault();
     setTitle('');
     setCategory('');
     setImage(null);
@@ -69,7 +72,7 @@ function Write() {
         onSubmit={submitBlog}>
         <div className='flex justify-end gap-4 mb-8 w-full text-sm'>
           <button
-            type='button' // Add type='button' to prevent form submission
+            type='button'
             className='bg-gray-200 px-5 py-1 rounded-sm cursor-pointer'
             onClick={handleCancelBtn}>
             Cancel

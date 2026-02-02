@@ -4,7 +4,7 @@ function Blog({ item }) {
   return (
     <div key={item._id} className='mb-4 pb-4 border-b border-b-gray-500/20'>
       <div className='flex items-center gap-4 pb-1 text-xs'>
-        <p>Saransh Koirala</p>{' '}
+        <p>{item.author?.name}</p>{' '}
         <div>
           {new Date(item.createdAt).toLocaleDateString('en-US', {
             month: 'short',
