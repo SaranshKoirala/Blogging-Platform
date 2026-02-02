@@ -12,6 +12,16 @@ Make sure you have the following installed:
 - npm or yarn
 - MongoDB Atlas account (or local MongoDB)
 
+## Login Info
+
+user - upwhats498@gmail.com
+password-saransh
+
+admin - saranshkoirala55@gmail.com
+password-saransh
+
+[Note: Only user can be created from the signup page]
+
 ---
 
 ## Setup Instructions
